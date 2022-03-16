@@ -1,0 +1,290 @@
+<?xml version="1.0"?>
+<robot name="donkey" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find donkey_description)/urdf/donkey_macros.xacro" />
+
+  <!-- Add chassis and it's inertia link -->
+
+  <link name="base_footprint" />
+
+  <link name="base_link" />
+
+  <link name="chassis">
+    <visual>
+      <xacro:chassis_geometry/>
+      <material name="blue" />
+    </visual>
+    <inertial>
+      <xacro:chassis_inertial_params />
+    </inertial>
+  </link>
+
+  <!-- Wheel Links -->
+
+  <link name="left_rear_wheel">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -0.0225"/>
+      <mass value="0.34"/>
+      <inertia ixx="0.00026046" ixy="0" ixz="0" iyy="0.00026046" iyz="0" izz="0.00041226"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.028" radius="0.0375"/>
+      </geometry>      
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -0.0225"/>
+      <geometry>
+        <cylinder length="0.028" radius="0.0375"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="right_rear_wheel">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.0225"/>
+      <mass value="0.34"/>
+      <inertia ixx="0.00026046" ixy="0" ixz="0" iyy="0.00026046" iyz="0" izz="0.00041226"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.028" radius="0.0375"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0225"/>
+      <geometry>
+        <cylinder length="0.028" radius="0.0375"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="left_front_wheel">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 -0.0225"/>
+      <mass value="0.34055"/>
+      <inertia ixx="0.00026046" ixy="0" ixz="0" iyy="0.00026046" iyz="0" izz="0.00041226"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.028" radius="0.0375"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -0.0225"/>
+      <geometry>
+        <cylinder length="0.028" radius="0.0375"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="right_front_wheel">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.0225"/>
+      <mass value="0.34055"/>
+      <inertia ixx="0.00026046" ixy="0" ixz="0" iyy="0.00026046" iyz="0" izz="0.00041226"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.028" radius="0.0375"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0225"/>
+      <geometry>
+        <cylinder length="0.028" radius="0.0375"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Steering pin links -->
+
+  <link name="left_steering_hinge">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.050"/>
+      <inertia ixx="4E-06" ixy="0" ixz="0" iyy="4E-06" iyz="0" izz="4E-06"/>
+    </inertial>
+  </link>
+
+  <link name="right_steering_hinge">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.100"/>
+      <inertia ixx="4E-06" ixy="0" ixz="0" iyy="4E-06" iyz="0" izz="4E-06"/>
+    </inertial>
+   </link>
+
+  <!-- Sensors -->
+
+  <link name="raspicam">
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.020 0.027 0.027"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.020 0.027 0.027"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+
+
+  <link name="imu">
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.030 0.025 0.020"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.030 0.025 0.020"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+
+  <link name="tfmini">
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.020 0.019 0.035"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.020 0.019 0.035"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+
+  <!-- Joints  -->
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 -0.036" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="base_footprint" />
+  </joint>
+
+  <joint name="base_link_joint" type="fixed">
+    <origin xyz="0 0 0.0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="chassis" />
+  </joint>
+
+  <!-- Add the left rear wheel with its joints and tranmissions -->
+
+  <joint name="left_rear_wheel_joint" type="continuous">
+    <origin rpy="1.5708 0 0" xyz="0 0.084 0"/>
+    <parent link="chassis"/>
+    <child link="left_rear_wheel"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="10" velocity="100"/>
+  </joint>
+
+  <joint name="right_rear_wheel_joint" type="continuous">
+    <origin rpy="1.5708 0 0" xyz="0 -0.084 0"/>
+    <parent link="chassis"/>
+    <child link="right_rear_wheel"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="10" velocity="100"/>
+  </joint>
+  
+  <joint name="left_steering_hinge_joint" type="revolute">
+    <origin rpy="0 1.5708 0" xyz="0.175 0.084 0"/>
+    <parent link="chassis"/>
+    <child link="left_steering_hinge"/>
+    <axis xyz="-1 0 0"/>
+    <limit effort="10" lower="-1.0" upper="1.0" velocity="100"/>
+  </joint>
+  
+  <joint name="right_steering_hinge_joint" type="continuous">
+    <origin rpy="0 1.5708 0" xyz="0.175 -0.084 0"/>
+    <parent link="chassis"/>
+    <child link="right_steering_hinge"/>
+    <axis xyz="-1 0 0"/>
+    <limit effort="10" lower="-1.0" upper="1.0" velocity="100"/>
+  </joint>
+
+  <joint name="left_front_wheel_joint" type="continuous">
+    <origin rpy="1.5708 0 0" xyz="0 0 0"/>
+    <parent link="left_steering_hinge"/>
+    <child link="left_front_wheel"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="10" velocity="100"/>
+  </joint>
+
+  <joint name="right_front_wheel_joint" type="continuous">
+    <origin rpy="1.5708 0 0" xyz="0 0 0"/>
+    <parent link="right_steering_hinge"/>
+    <child link="right_front_wheel"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="10" velocity="100"/>
+  </joint>
+  
+  <!-- Sensor Joints, # extrinsics need to be refined -->
+
+  <joint name="raspicam_joint" type="fixed">
+    <origin xyz="0.174 0 0.163" rpy="0 0.20 0"/>
+    <parent link="chassis"/>
+    <child link="raspicam"/>
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="camera_link">
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="0 0.06 0" rpy="0 0 0"/>
+    <parent link="raspicam"/>
+    <child link="camera_link"/>
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="0.063 0 0.039" rpy="0 0 0"/>
+    <parent link="chassis"/>
+    <child link="imu"/>
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <joint name="tfmini_joint" type="fixed">
+    <origin xyz="0.1574 0 0.2425" rpy="3.142 0.087 0"/>
+    <parent link="chassis"/>
+    <child link="tfmini"/>
+    <axis xyz="0 0 1" />
+  </joint>
+
+</robot>

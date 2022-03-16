@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <node name="base_controller" pkg="donkey_control" type="low_level_control"/>
+</launch>

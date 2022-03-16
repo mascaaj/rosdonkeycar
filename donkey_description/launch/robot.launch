@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!-- Launch file to :
+1. Add robot description on parameter server
+2. Start robot and joint state publisher
+3. Launch gazebo with and empty world
+4. Spawn the donkey car in gazebo world
+15MAR22 - AJM 
+-->
+<launch>
+	<arg name="paused" default="false"/>
+	<arg name="debug" default="false"/>
+	<arg name="gui" default="true"/>
+	<!-- urdf xml robot description loaded on the Parameter Server, converting the xacro into a proper-->
+  	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find donkey_description)/urdf/donkey.xacro'"/>
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+    		<!--remap from="/joint_states" to="/racecar/joint_states" /-->
+			
+  	<!--/node-->
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="worlds/empty.world" />
+    <arg name="paused" value="$(arg paused)" />
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="use_sim_time" value="true" />
+    <arg name="headless" value="false" />
+  </include>
+
+	<!-- push table_description to factory and spawn robot in gazebo -->
+	<node name="spawn_donkey" 
+			pkg="gazebo_ros" 
+			type="spawn_model" 
+			args="-urdf -param robot_description -z 0.01 -model donkey" 
+			respawn="false" 
+			output="screen" />
+
+</launch>

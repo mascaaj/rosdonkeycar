@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>tfmini_laserscan_ros</name>
+  <version>0.0.2</version>
+  <description>Tfmini lasercanner using pigpio-blaster</description>
+
+  <maintainer email="alokejm@gmail.com">AlokeM</maintainer>
+
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <exec_depend>rospy</exec_depend>
+
+  <export>
+ 
+  </export>
+</package>

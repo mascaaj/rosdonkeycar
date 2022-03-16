@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- Launch file to spawn the model in gazebo
+It requires gazebo to be running 
+15MAR22 - AJM 
+-->
+<launch>
+  	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find donkey_description)/urdf/donkey.xacro'"/>
+
+	<node name="spawn_donkey" 
+			pkg="gazebo_ros" 
+			type="spawn_model" 
+			args="-urdf -param robot_description -z 0.01 -model donkey" 
+			respawn="false" 
+			output="screen" />
+
+</launch>

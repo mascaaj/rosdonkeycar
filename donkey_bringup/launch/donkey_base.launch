@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<launch>
+
+	<arg name="imu_frame_id"			default="imu"/>
+	<arg name="odometry_frame_id"		default="/odom"/>
+	<arg name="enable_odometry"			default="true"/>
+
+	<!-- Launch i2cpwm board node, launching here reduces need to fork / maintain another repo -->
+	<node pkg="i2cpwm_board" name="i2cpwm_board_node" type="i2cpwm_board" output="screen"/>
+	
+	<!-- Launch donkey base controller node-->
+	<include file="$(find donkey_control)/launch/base_controller.launch"/>
+
+	<!-- Launch IMU node -->
+	<include file="$(find imu_bno055)/launch/imu.launch">
+		<arg name="imu_frame_id"		default="$(arg imu_frame_id)"/>
+	</include>	
+	
+	<include file="$(find hallsensor_odometry_ros)/launch/hall_sensor.launch">
+		<arg name="odometry_frame_id"	default="$(arg odometry_frame_id)"/>
+	</include>
+
+	<node pkg="hallsensor_odometry_ros" name="dead_reckoning" type="odometry.py" output="screen"/>
+</launch>

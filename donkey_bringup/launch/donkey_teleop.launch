@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<launch>
+
+	<!-- wireless logitech = f710, wired logitech = f310-->
+	<arg name="joy_config"		default="f710"/> 
+    <arg name="config_filepath" default="$(find donkey_bringup)/config/$(arg joy_config).config.yaml" />
+
+	<include file="$(find teleop_twist_joy)/launch/teleop.launch">
+		<arg name="joy_config"	value="$(arg joy_config)"/>
+		<arg name="config_filepath"	value="$(arg config_filepath)"/>
+	</include>
+	
+</launch>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<launch>
+
+	<arg name="enable_raw"				default="true"/>
+	<arg name="camera_frame_id"			default="raspicam"/>
+	<arg name="camera_name"				default="donkey_1280x960"/>
+	<arg name="lidar_frame_id"			default="tfmini"/>
+	<arg name="lidar_active"			default="true"/>
+
+	<!-- Launch camera node -->
+	<remap from="/raspicam_node/image" to="raspicam_node/image_raw"/>	
+	<include file="$(find donkey_raspicam)/launch/donkey_v2cam_10fps.launch">
+		<arg name="enable_raw"			default="$(arg enable_raw)"/>
+		<arg name="camera_frame_id"		default="$(arg camera_frame_id)"/>
+		<arg name="camera_name"  		default="$(arg camera_name)"/>
+	</include>	
+
+	 <node name="image_proc" pkg="image_proc" type="image_proc" ns="/raspicam_node"/>
+
+	<group if="$(arg lidar_active)">
+		<!-- Launch Lidar -->
+		<include file="$(find tfmini_laserscan_ros)/launch/tfmini_scanner.launch">
+			<arg name="lidar_frame_id"		default="$(arg lidar_frame_id)"/>
+		</include>	
+	</group> 
+
+</launch>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <name>donkey_description</name>
+  <version>0.0.1</version>
+  <description>The F1/10 racecar package, modified for donkeycar 1/16 scale</description>
+
+  <maintainer email="alokejm@gmail.com">AlokeM</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+        
+  </export>
+</package>

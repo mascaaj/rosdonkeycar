@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<launch>
+	<arg name="robot_namespace" default="/"/>
+	<arg name="joy_config"					default="f710"/>
+
+	<arg name="base_enable"					default="true"/>
+	<arg name="teleop_enable"				default="true"/>
+	<arg name="sensors_enable"				default="true"/>
+	<!-- <arg name="perception_enable"			default="true"/>
+	<arg name="localization_enable"			default="true"/>
+	<arg name="navigation_enable"			default="true"/> -->
+
+	<group if="$(arg base_enable)">
+		<include file="$(find donkey_bringup)/launch/donkey_base.launch"/>
+	</group> 
+
+	<!-- urdf xml robot description loaded on the Parameter Server-->
+  	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find donkey_description)/urdf/donkey.xacro' robot_namespace:=$(arg robot_namespace)"/>
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+    		<!--remap from="/joint_states" to="/racecar/joint_states" /-->
+
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+    
+	<group if="$(arg teleop_enable)">
+		<include file="$(find donkey_bringup)/launch/donkey_teleop.launch">
+			<arg name="joy_config"	value="$(arg joy_config)"/>
+		</include>
+	</group> 
+	
+	<group if="$(arg sensors_enable)">
+		<include file="$(find donkey_bringup)/launch/donkey_sensors.launch"/>
+	</group> 
+
+
+</launch>

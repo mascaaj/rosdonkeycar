@@ -1,0 +1,6 @@
+<launch>
+    <arg name="lidar_frame_id" default="/tfmini"/>
+    <node pkg="tfmini_laserscan_ros" type="ros_tfmini_laser_scanner_pigpio.py" name="laserscan" output="screen" >
+        <param name="frame_id" value="$(arg lidar_frame_id)"/>
+    </node>
+</launch>

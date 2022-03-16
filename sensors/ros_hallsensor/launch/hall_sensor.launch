@@ -1,0 +1,7 @@
+<launch>
+    <arg name="odometry_frame_id" default="/odom"/>
+
+    <node pkg="hallsensor_odometry_ros" type="hallsensor.py" name="hall_odometry" output="screen" >
+        <param name="frame_id" value="$(arg odometry_frame_id)"/>
+    </node>
+</launch>

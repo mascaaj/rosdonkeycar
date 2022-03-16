@@ -1,0 +1,26 @@
+image_width: 1280
+image_height: 960
+camera_name: donkey_1280x960
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [ 635.50447,    0.     ,  619.72287,
+            0.     ,  638.92687,  420.48605,
+            0.     ,    0.     ,    1.     ]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.252139, 0.042535, 0.000667, -0.002791, 0.000000]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [ 1.,  0.,  0.,
+          0.,  1.,  0.,
+          0.,  0.,  1.]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [ 432.80524,    0.     ,  618.89671,    0.     ,
+            0.     ,  511.31674,  388.17307,    0.     ,
+            0.     ,    0.     ,    1.     ,    0.     ]

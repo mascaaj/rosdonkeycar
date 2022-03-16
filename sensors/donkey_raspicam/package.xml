@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <name>donkey_raspicam</name>
+  <version>0.0.1</version>
+  <description>Pi camera v2 meta node for raspicam</description>
+  <maintainer email="alokejm@gmail.com">AlokeM</maintainer>
+
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>raspicam_node</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>raspicam_node</run_depend>
+
+
+  <export>
+
+  </export>
+</package>

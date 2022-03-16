@@ -1,0 +1,33 @@
+#!/usr/bin/python
+
+import rospy,time
+import message_filters
+from sensor_msgs.msg import Image, CameraInfo
+    
+#class imageSync():
+#	def __init__(self):
+#		self.got_new_msg = False		
+
+#		image_sub = message_filters.Subscriber('/raspicam_node/image_rect', Image)
+ #               ts = message_filters.TimeSynchronizer([image_sub, info_sub], 10)
+ #               ts.registerCallback(self.cb_isync)
+#		info_sub = message_filters.Subscriber('/raspicam_node/camera_info', CameraInfo)
+  
+#		ts = message_filters.TimeSynchronizer([image_sub, info_sub], 10)
+#		ts.registerCallback(self.cb_isync)
+rospy.init_node("sync")
+
+def cb_isync(Image, CameraInfo):
+	r=rospy.Rate(16)
+	rospy.loginfo("syncing")
+	print("Entering loop")
+	# ts = ApproximateTimeSynchronizer([self.sub_gps, self.sub_rpy], 2, 0.033)
+
+while not rospy.is_shutdown():
+        image_sub = message_filters.Subscriber('/raspicam_node/image_rect', Image)
+        info_sub = message_filters.Subscriber('/raspicam_node/camera_info', CameraInfo)
+
+	ts = message_filters.TimeSynchronizer([image_sub, info_sub], 10)
+	ts.registerCallback(cb_isync)
+	rospy.spin()
+
