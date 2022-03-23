@@ -23,3 +23,19 @@ The intent was to provide an ackerman steer platform for software development al
 
 ### Operating System
  - [Ubiquity Robotics - Ubuntu 16.04 + ROS Kinetic](https://downloads.ubiquityrobotics.com/pi.html)
+
+## Repo setup
+
+ - Create a catkin workspace, clone the repository in the src folder
+
+    ```
+        mkdir -p catkin_ws/src
+        git clone https://github.com/mascaaj/rosdonkeycar.git
+    ```
+
+ - Initialize git submodules (if this is first time cloning), then recursively update
+
+    ```
+        git submodule update --init
+        git submodule update --recursive
+    ```
