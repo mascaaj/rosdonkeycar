@@ -61,8 +61,8 @@ class OdometryPopulate():
 		self.odom.child_frame_id = "odom"
 		self.odom.pose.pose.position.x = self.x
 		self.odom.pose.pose.position.y = self.y
-		self.odom.pose.pose.orientation.x = 0.0
-		self.odom.pose.pose.orientation.y = 0.0
+		# self.odom.pose.pose.orientation.x = 0.0
+		# self.odom.pose.pose.orientation.y = 0.0
 		self.odom.pose.pose.orientation.z = sin(self.yaw/2.0)
 		self.odom.pose.pose.orientation.w = cos(self.yaw/2.0)
 
@@ -73,7 +73,7 @@ class OdometryPopulate():
 
 		# Velocity
 		self.odom.twist.twist.linear.x = msg.y
-		self.odom.twist.twist.linear.y = 0.0
+		# self.odom.twist.twist.linear.y = 0.0
 		self.odom.twist.twist.angular.z = angular_velocity_
 		self.pub_odometry.publish(self.odom)
 

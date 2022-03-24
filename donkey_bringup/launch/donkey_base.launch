@@ -13,10 +13,14 @@
 	<include file="$(find donkey_control)/launch/base_controller.launch"/>
 
 	<!-- Launch IMU node -->
+	<!-- <remap from="/imu/data" to="/imu/data_original"/>
+	<remap from="/imu/raw" to="/imu/data_raw"/> -->
 	<include file="$(find imu_bno055)/launch/imu.launch">
 		<arg name="imu_frame_id"		default="$(arg imu_frame_id)"/>
 	</include>	
-	
+
+	<include file="$(find imu_bno055)/launch/imu_filter.launch"/>
+
 	<include file="$(find hallsensor_odometry_ros)/launch/hall_sensor.launch">
 		<arg name="odometry_frame_id"	default="$(arg odometry_frame_id)"/>
 	</include>

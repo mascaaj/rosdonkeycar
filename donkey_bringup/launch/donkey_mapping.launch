@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<launch>
+
+	<arg name="enable_ekf"				default="true"/>
+	<arg name="enable_gmapping"			default="true"/>
+
+	<!-- Launch robot_localization -->
+    <group if="$(arg enable_ekf)">
+	    <include file="$(find donkey_localization)/launch/ekf.launch"/>
+	</group> 
+
+    <!-- Launch amcl -->
+	<group if="$(arg enable_gmapping)">
+		<include file="$(find donkey_localization)/launch/gmapping.launch"/>
+	</group> 
+
+</launch>

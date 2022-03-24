@@ -5,11 +5,11 @@
 	<arg name="joy_config"					default="f710"/>
 
 	<arg name="base_enable"					default="true"/>
-	<arg name="teleop_enable"				default="true"/>
-	<arg name="sensors_enable"				default="true"/>
-	<!-- <arg name="perception_enable"			default="true"/>
+	<arg name="teleop_enable"				default="false"/>
+	<arg name="sensors_enable"				default="false"/>
+	<!-- <arg name="perception_enable"			default="true"/> -->
 	<arg name="localization_enable"			default="true"/>
-	<arg name="navigation_enable"			default="true"/> -->
+	<!-- <arg name="navigation_enable"			default="true"/> -->
 
 	<group if="$(arg base_enable)">
 		<include file="$(find donkey_bringup)/launch/donkey_base.launch"/>
@@ -33,5 +33,8 @@
 		<include file="$(find donkey_bringup)/launch/donkey_sensors.launch"/>
 	</group> 
 
+	<group if="$(arg localization_enable)">
+		<include file="$(find donkey_bringup)/launch/donkey_localization.launch"/>
+	</group> 
 
 </launch>
